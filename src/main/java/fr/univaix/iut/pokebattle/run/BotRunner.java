@@ -9,21 +9,22 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class BotRunner {
-    private BotRunner() {
+	private BotRunner() {
 
-    }
+	}
 
-    public static void runBot(Bot bot, String credentialsFileName) throws TUSEException {
-        try (InputStream inputStream = getResourceAsStream(credentialsFileName)) {
-            Credentials credentials = Credentials.loadCredentials(inputStream);
-            TwitterBot twitterBot = new TwitterBot(bot, credentials);
-            twitterBot.startBot();
-        } catch (IOException e) {
-            throw new TUSEException("Input error on credentials loading", e);
-        }
-    }
+	public static void runBot(Bot bot, String credentialsFileName) throws TUSEException {
+		try (InputStream inputStream = getResourceAsStream(credentialsFileName)) {
+			Credentials credentials = Credentials.loadCredentials(inputStream);
+			TwitterBot twitterBot = new TwitterBot(bot, credentials);
+			twitterBot.startBot();
+		}
+		catch (IOException e) {
+			throw new TUSEException("Input error on credentials loading", e);
+		}
+	}
 
-    static InputStream getResourceAsStream(String fileName) {
-        return PokemonMain.class.getClassLoader().getResourceAsStream(fileName);
-    }
+	static InputStream getResourceAsStream(String fileName) {
+		return PokemonMain.class.getClassLoader().getResourceAsStream(fileName);
+	}
 }
